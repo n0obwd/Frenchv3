@@ -1,7 +1,7 @@
 from database_connection import command
 
 
-class Games():
+class Games:
     def __init__(self, mode):
         self.game_mode = mode
         self.game_list = {1: game1, 2: game2, 3: game3, 4: game4}
@@ -11,7 +11,7 @@ class Games():
         self.game_list[mode]()
 
 
-class Verbs():
+class Verbs:
     def __init__(self,word):
         self.inf = word
         self.conjugation = {1: present, 2: passe_compose, 3: imparfait,
@@ -25,8 +25,10 @@ class Verbs():
             tense_id = word
         print(self.conjugation[tense_id](self.inf))
 
+
 def vowel(word):
     pass
+
 
 def present(verb):
     command_str = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
@@ -35,6 +37,7 @@ def present(verb):
     #conj_v = command(command_str, '')
     result = conj_v
     return result
+
 
 def passe_compose():
     pass
