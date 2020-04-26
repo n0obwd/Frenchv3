@@ -1,3 +1,5 @@
+from database_connection import command
+
 
 class Games():
     def __init__(self, mode):
@@ -9,9 +11,55 @@ class Games():
         self.game_list[mode]()
 
 
+class Verbs():
+    def __init__(self,word):
+        self.inf = word
+        self.conjugation = {1: present, 2: passe_compose, 3: imparfait,
+                            4: plus_que_parfait, 5: future_simple, 6: future_anterieur}
+
+    def conjugate(self,word):
+        if type(word) is str:
+            command_str = f"SELECT tense_id FROM tenses WHERE tense = \'{word}\'"
+            tense_id = command(command_str, '')
+        else:
+            tense_id = word
+        print(self.conjugation[tense_id](self.inf))
+
+def vowel(word):
+    pass
+
+def present(verb):
+    command_str = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
+    conj_v = command(command_str, '')
+    command_str = f"SELECT * FROM verb WHERE inf = \'{verb}\'"
+    conj_v = command(command_str, '')
+    result = []
+    return result
+
+def passe_compose():
+    pass
+
+
+def imparfait():
+    pass
+
+
+def plus_que_parfait():
+    pass
+
+
+def future_simple():
+    pass
+
+
+def future_anterieur():
+    pass
+
+
 def game1():
     word = input("What verb do you want to check: ").lower()
-    print(word)
+    verb = Verbs(word)
+    verb.conjugate(1)
 
 
 def game2():
@@ -25,9 +73,6 @@ def game3():
 def game4():
     pass
 
-
-def conjugation(verb, tense):
-    pass
 
 
 def display_menu():
