@@ -20,7 +20,7 @@ class Verbs():
     def conjugate(self,word):
         if type(word) is str:
             command_str = f"SELECT tense_id FROM tenses WHERE tense = \'{word}\'"
-            tense_id = command(command_str, '')
+            tense_id = command(command_str, '')[0][0]
         else:
             tense_id = word
         print(self.conjugation[tense_id](self.inf))
@@ -31,9 +31,9 @@ def vowel(word):
 def present(verb):
     command_str = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
     conj_v = command(command_str, '')
-    command_str = f"SELECT * FROM verb WHERE inf = \'{verb}\'"
-    conj_v = command(command_str, '')
-    result = []
+    #command_str = f"SELECT * FROM verb WHERE inf = \'{verb}\'"
+    #conj_v = command(command_str, '')
+    result = conj_v
     return result
 
 def passe_compose():
@@ -59,7 +59,7 @@ def future_anterieur():
 def game1():
     word = input("What verb do you want to check: ").lower()
     verb = Verbs(word)
-    verb.conjugate(1)
+    verb.conjugate('présent')
 
 
 def game2():
