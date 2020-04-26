@@ -1,5 +1,5 @@
 from database_connection import command
-
+import pandas as pd
 
 class Games:
     def __init__(self, mode):
@@ -19,22 +19,27 @@ class Verbs:
 
     def conjugate(self,word):
         if type(word) is str:
-            command_str = f"SELECT tense_id FROM tenses WHERE tense = \'{word}\'"
-            tense_id = command(command_str, '')[0][0]
+            query = f"SELECT tense_id FROM tenses WHERE tense = \'{word}\'"
+            tense_id = command(query, '')[0][0]
         else:
             tense_id = word
-        print(self.conjugation[tense_id](self.inf))
+        print(self.conjugation[tense_id](self.inf, load_pronouns()))
+
+
+def load_pronouns():
+    query = f"SELECT * FROM subject_pronouns"
+    sp_df = pd.DataFrame(command(query, ''))
+    return sp_df
 
 
 def vowel(word):
     pass
 
 
-def present(verb):
-    command_str = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
-    conj_v = command(command_str, '')
-    #command_str = f"SELECT * FROM verb WHERE inf = \'{verb}\'"
-    #conj_v = command(command_str, '')
+def present(verb, sp):
+    query = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
+    conj_v = command(query, '')
+
     result = conj_v
     return result
 
