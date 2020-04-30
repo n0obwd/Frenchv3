@@ -14,13 +14,16 @@ class Verbs:
             tense_id = command(query, '', '')[0][0]
         else:
             tense_id = word
-        print(self.conjugation[tense_id](self.inf))
+        return self.conjugation[tense_id](self.inf)
 
 
 def game1():
     word = input("What verb do you want to check: ").lower()
     verb = Verbs(word)
-    verb.conjugate('présent')
+    answer = verb.conjugate('présent')
+    print(f"Conjugation for {word} is: ")
+    for i in range(0,6):
+        print(f"{i + 1}. {answer[i]}")
 
 
 def game2():

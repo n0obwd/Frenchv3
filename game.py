@@ -14,6 +14,11 @@ class Games:
         self.game_list[mode]()
 
 
+def isbreak(self):
+    again = input("Do you want to play again? (Y\\N): ").lower()
+    return again == 'n'
+
+
 class Words:
     def __init__(self):
         pass
@@ -26,19 +31,26 @@ def display_menu():
     print("Verb: ")
     print("1/ Check conjugation of a verb")
     print("2/ Test conjugation of a verb in specific tense")
-    print("3/ Test conjugation of random verbs (infinitive")
-    print("4/ Test conjugation of random verbs (random tense")
+    print("3/ Test conjugation of random verbs (infinitive)")
+    print("4/ Test conjugation of random verbs (random tense)")
+    print("----------------")
     print("Number: ")
     print("10/ Random number 1 - 100")
     print("11/ Random number 1 - 1000++")
+    print("----------------")
     print("Date: ")
     print("15/ Random date vocabulary")
+    print("----------------")
     print("Country: ")
     print("20/ Random country")
     print("----------------")
 
 
 if __name__ == '__main__':
-    display_menu()
-    action = int(input("Choose your action: "))
-    game = Games(action)
+    while True:
+        display_menu()
+        action = int(input("Choose your action: "))
+        game = Games(action)
+        if isbreak():
+            break
+    print("Thank you.")
