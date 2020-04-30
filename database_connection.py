@@ -3,7 +3,7 @@ from config import config
 
 
 def db_connect(func):
-    def connect(command,result):
+    def connect(command_str, variable, result):
         """ Connect to the PostgreSQL database server """
         conn = None
         try:
@@ -17,7 +17,10 @@ def db_connect(func):
             cur = conn.cursor()
 
             # execute a statement
-            cur.execute(command)
+            if variable == '':
+                cur.execute(command_str)
+            else:
+                cur.execute(command_str, variable)
 
             # display the PostgreSQL database server version
             result = cur.fetchall()
@@ -30,12 +33,12 @@ def db_connect(func):
         finally:
             if conn is not None:
                 conn.close()
-        return func(command, result)
+        return func(command, variable, result)
     return connect
 
-
+1
 @db_connect
-def command(commandStr, result):
+def command(commandStr, variable, result):
     return result
 
 

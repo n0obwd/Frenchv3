@@ -1,86 +1,22 @@
 from database_connection import command
-import pandas as pd
+from game_list import *
+
 
 class Games:
     def __init__(self, mode):
         self.game_mode = mode
+        choice = list(range(1,14))
+        game_name = ['game'for i in choice ]
         self.game_list = {1: game1, 2: game2, 3: game3, 4: game4}
-        self.startgame(self.game_mode)
+        self.start_game(self.game_mode)
 
-    def startgame(self,mode):
+    def start_game(self,mode):
         self.game_list[mode]()
 
 
-class Verbs:
-    def __init__(self,word):
-        self.inf = word
-        self.conjugation = {1: present, 2: passe_compose, 3: imparfait,
-                            4: plus_que_parfait, 5: future_simple, 6: future_anterieur}
-
-    def conjugate(self,word):
-        if type(word) is str:
-            query = f"SELECT tense_id FROM tenses WHERE tense = \'{word}\'"
-            tense_id = command(query, '')[0][0]
-        else:
-            tense_id = word
-        print(self.conjugation[tense_id](self.inf, load_pronouns()))
-
-
-def load_pronouns():
-    query = f"SELECT * FROM subject_pronouns"
-    sp_df = pd.DataFrame(command(query, ''))
-    return sp_df
-
-
-def vowel(word):
-    pass
-
-
-def present(verb, sp):
-    query = f"SELECT inf,present1,present2,present3,present4,present5,present6 FROM verb WHERE inf = \'{verb}\'"
-    conj_v = command(query, '')
-
-    result = conj_v
-    return result
-
-
-def passe_compose():
-    pass
-
-
-def imparfait():
-    pass
-
-
-def plus_que_parfait():
-    pass
-
-
-def future_simple():
-    pass
-
-
-def future_anterieur():
-    pass
-
-
-def game1():
-    word = input("What verb do you want to check: ").lower()
-    verb = Verbs(word)
-    verb.conjugate('présent')
-
-
-def game2():
-    pass
-
-
-def game3():
-    pass
-
-
-def game4():
-    pass
-
+class Words:
+    def __init__(self):
+        pass
 
 
 def display_menu():
@@ -92,6 +28,13 @@ def display_menu():
     print("2/ Test conjugation of a verb in specific tense")
     print("3/ Test conjugation of random verbs (infinitive")
     print("4/ Test conjugation of random verbs (random tense")
+    print("Number: ")
+    print("10/ Random number 1 - 100")
+    print("11/ Random number 1 - 1000++")
+    print("Date: ")
+    print("15/ Random date vocabulary")
+    print("Country: ")
+    print("20/ Random country")
     print("----------------")
 
 
