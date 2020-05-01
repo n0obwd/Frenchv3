@@ -5,17 +5,23 @@ from game_list import *
 class Games:
     def __init__(self, mode):
         self.game_mode = mode
-        choice = list(range(1,14))
-        game_name = ['game'for i in choice ]
-        self.game_list = {1: game1, 2: game2, 3: game3, 4: game4}
-        self.start_game(self.game_mode)
+        self.game_list = {1: check_verb, 15: date, 20: country, 10: number100, 11:number1000}
+        self.result = []
 
-    def start_game(self,mode):
-        self.game_list[mode]()
+    def calling_game(self):
+        while True:
+            self.result = self.game_list[self.game_mode]()
+            print(self.result[1])
+            if not self.rerun():
+                break
+
+    def rerun(self):
+        is_rerun = input("Practice again? (Y\\N): ").lower()
+        return is_rerun == 'y'
 
 
-def isbreak(self):
-    again = input("Do you want to play again? (Y\\N): ").lower()
+def is_break():
+    again = input("Different practice? (Y\\N): ").lower()
     return again == 'n'
 
 
@@ -51,6 +57,7 @@ if __name__ == '__main__':
         display_menu()
         action = int(input("Choose your action: "))
         game = Games(action)
-        if isbreak():
+        game.calling_game()
+        if is_break():
             break
     print("Thank you.")
